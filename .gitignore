@@ -64,6 +64,9 @@ target/
 #Token file containing the bot secret.
 token.txt
 
+#data files not to be uploaded.
+data/
+
 #pyCharm datafiles
 .idea/
 
