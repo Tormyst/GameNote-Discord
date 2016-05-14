@@ -61,4 +61,10 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+#Token file containing the bot secret.
 token.txt
+
+#pyCharm datafiles
+.idea/
+
+.idea/workspace.xml
