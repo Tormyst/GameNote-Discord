@@ -1,5 +1,5 @@
 import discord
-from preferences import Preferences
+from .preferences import Preferences
 
 def handle_write(c:discord.Client, message:discord.Message, command:list, pref:Preferences):
     if message.server and len(command) == 3:

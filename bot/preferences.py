@@ -2,7 +2,7 @@ import os
 import pickle
 from discord import Server, Channel
 
-channelFile = "../data/channelPref.dat"
+channelFile = "data/channelPref.dat"
 
 class Preferences:
     def __init__(self):
