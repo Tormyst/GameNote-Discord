@@ -2,7 +2,7 @@ import discord
 from preferences import Preferences
 
 def handle_write(c:discord.Client, message:discord.Message, command:list, pref:Preferences):
-    if message.server and len(command) == 3 and not message.author.bot:
+    if message.server and len(command) == 3:
         if(command[2] == "here"):
             toSet = message.channel
         elif len(message.channel_mentions) > 0 and message.channel_mentions[0].type == discord.ChannelType.text:
@@ -31,8 +31,7 @@ def clientSetup(pref:Preferences):
 
     @c.async_event
     def on_message(message:discord.Message):
-        if message.content.startswith("{}".format(c.user.mention)):
-            print("Message for me")
+        if message.content.startswith(c.user.mention) and not message.author.bot:
             command = message.content.lower().split(" ")
             if command[1] == "write":
                 yield from handle_write(c, message, command, pref)
@@ -43,10 +42,9 @@ def clientSetup(pref:Preferences):
             else:
                 yield from c.send_message(message.channel, "I don't understand what you said.  Try asking for help with {} help".format(c.user.mention))
 
-
     @c.async_event
     def on_member_update(old:discord.Member, new:discord.Member):
-        if new.game and old.game != new.game and old:
+        if new.game and old.game != new.game and not old.bot:
             sendOn = pref.getServerChannel(old.server)
             yield from c.send_message(sendOn, "{} is now playing {}.".format(new.name, new.game.name))
 
